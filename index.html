@@ -10,50 +10,481 @@
 <link rel="apple-touch-icon" href="logo.png">
 <title>AgendaPro — Gestão de Beleza</title>
 <style>
-:root{color-scheme:light dark;--bg:light-dark(#fff8fb,#1a1219);--surface:light-dark(#ffffff,#261c25);--surface2:light-dark(#f8edf3,#342431);--text:light-dark(#291522,#fff5fb);--muted:light-dark(#7c6877,#c8b7c5);--border:light-dark(#eadce5,#493746);--pink:#e75d9b;--pink2:#bc3d7c;--pink-soft:#e75d9b22;--green:#20876a;--green-soft:#20876a22;--orange:#eaa83b;--orange-soft:#eaa83b22;--red:#e05c6e;--shadow:0 12px 32px #42122a12;--radius:16px}
-*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer;border:none}a{color:inherit}
-.top{background:linear-gradient(115deg,#281321,#542544);color:#fff;padding:16px max(16px,calc((100% - 1200px)/2));display:flex;justify-content:space-between;align-items:center;gap:16px;position:sticky;top:0;z-index:40;box-shadow:0 4px 20px #0003}
-.brand{display:flex;align-items:center;gap:14px}.logo{height:52px;width:52px;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 0 0 2px #e75d9b66,0 0 18px #e75d9b44;flex-shrink:0}.logo img{width:100%;height:100%;object-fit:cover;display:block}
-.brand h1{font-size:22px;letter-spacing:-.6px}.brand p{color:#f3ccdf;font-size:12px;margin-top:2px}
-.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pill{border:1px solid #ffffff44;border-radius:99px;padding:7px 12px;font-size:12px;color:#fff}
-.btn{border-radius:12px;padding:10px 16px;background:var(--pink);color:#fff;font-weight:700;font-size:13px;transition:.2s;display:inline-flex;align-items:center;gap:6px}.btn:hover{background:var(--pink2);transform:translateY(-1px)}
-.btn.secondary{background:var(--surface);color:var(--text);border:1px solid var(--border)}.btn.ghost{background:transparent;color:#fff;border:1px solid #ffffff55}.btn.small{padding:7px 12px;font-size:12px}.btn.danger{background:var(--red)}
-.btn.icon{width:36px;height:36px;padding:0;display:grid;place-items:center;border-radius:10px;background:var(--surface2);color:var(--text);font-size:16px}
-.wrap{max-width:1200px;margin:0 auto;padding:24px 16px 60px}
-.welcome{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:24px;flex-wrap:wrap}.welcome h2{font-size:clamp(22px,4vw,30px);letter-spacing:-1px}.welcome p{color:var(--muted);font-size:14px;margin-top:4px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);transition:.2s}.stat:hover{transform:translateY(-2px)}
-.stat-head{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;font-weight:500}
-.stat-icon{height:32px;width:32px;border-radius:10px;background:var(--surface2);display:grid;place-items:center;font-size:15px}
-.stat strong{display:block;font-size:26px;letter-spacing:-.8px;margin:10px 0 2px}.stat small{color:var(--muted);font-size:11px}
-.layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,.85fr);gap:16px}
-.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:16px;box-shadow:var(--shadow)}
-.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}.panel h3{font-size:16px;letter-spacing:-.2px}.panel-sub{font-size:12px;color:var(--muted);margin-top:3px}
-.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.field,select,textarea{width:100%;border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:10px;padding:10px 12px;outline:none;transition:border .2s}.field:focus,select:focus,textarea:focus{border-color:var(--pink)}
-input[type=date],input[type=time]{min-height:42px}.search-box{position:relative;flex:1;min-width:160px}.search-box input{padding-left:36px}.search-box::before{content:"⌕";position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px}
-.appt{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--border);align-items:center;transition:.15s}.appt:first-child{border-top:0}.appt:hover{background:var(--surface2);margin:0 -10px;padding:12px 10px;border-radius:12px}
-.time{width:52px;font-size:13px;color:var(--muted);font-weight:700;flex-shrink:0}.avatar{height:42px;width:42px;border-radius:13px;background:var(--surface2);display:grid;place-items:center;font-size:20px;flex-shrink:0}
-.appt-info{min-width:0;flex:1}.appt-info strong{font-size:14px;display:block}.appt-info span{font-size:12px;color:var(--muted);display:block;margin-top:2px}
-.status{font-size:11px;border-radius:99px;padding:5px 10px;font-weight:600;white-space:nowrap}.status.confirmed{background:var(--green-soft);color:light-dark(#167454,#7ee0bd)}.status.pending{background:var(--orange-soft);color:light-dark(#9c6710,#ffd18a)}.status.canceled{background:#e05c6e22;color:light-dark(#b33a4a,#ff9aaa)}
-.appt-actions{display:flex;gap:4px;opacity:0;transition:.2s}.appt:hover .appt-actions{opacity:1}.appt-actions button{width:32px;height:32px;border-radius:8px;background:var(--surface);border:1px solid var(--border);font-size:14px;display:grid;place-items:center}.appt-actions button:hover{background:var(--pink-soft);border-color:var(--pink)}
-.service{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--border)}.service:first-of-type{border-top:0}.service .emoji{width:40px;height:40px;border-radius:12px;background:var(--surface2);display:grid;place-items:center;font-size:18px}
-.service-info{flex:1;min-width:0}.service-info strong{display:block;font-size:14px}.service-info small{color:var(--muted);font-size:12px}.price{font-size:14px;font-weight:800;white-space:nowrap}.service-actions{display:flex;gap:4px}
-.profile-card{background:linear-gradient(145deg,#fce5f0,#f8f0f5);color:#3d2334;border-radius:14px;padding:16px;display:flex;gap:14px;align-items:center}
-.profile-avatar{height:58px;width:58px;border-radius:16px;overflow:hidden;background:#000;flex-shrink:0;box-shadow:0 0 0 2px #e75d9b55}.profile-avatar img{width:100%;height:100%;object-fit:cover;display:block}
-.profile-card h4{margin-bottom:4px}.profile-card p{font-size:12px;color:#795b6d;margin-bottom:8px}.profile-card a{color:#a32c6a;font-weight:700;font-size:12px;text-decoration:none}.profile-card a:hover{text-decoration:underline}
-.quick{display:grid;grid-template-columns:1fr 1fr;gap:8px}.quick button{padding:14px 12px;text-align:left;border:1px solid var(--border);background:var(--bg);border-radius:12px;color:var(--text);font-size:12px;font-weight:700;transition:.2s}.quick button:hover{border-color:var(--pink);background:var(--pink-soft)}.quick button span{display:block;font-size:20px;margin-bottom:6px}
-.empty{text-align:center;color:var(--muted);padding:32px 12px;font-size:13px}.empty span{font-size:32px;display:block;margin-bottom:8px}
-.modal-backdrop{position:fixed;inset:0;background:#10071199;display:none;align-items:center;justify-content:center;padding:16px;z-index:50;backdrop-filter:blur(4px)}.modal-backdrop.open{display:flex}
-.modal{width:min(480px,100%);max-height:90vh;overflow:auto;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:0 25px 80px #0005;animation:slideUp .25s ease}
-@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-head h3{font-size:18px}.close{background:var(--surface2);color:var(--text);border-radius:10px;height:34px;width:34px;font-size:20px;display:grid;place-items:center}
-.formgrid{display:grid;gap:12px}.formgrid label{display:grid;gap:5px;font-size:12px;color:var(--muted);font-weight:500}.form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
-.client-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}.client-item:last-child{border-bottom:0}.client-avatar{width:38px;height:38px;border-radius:12px;background:var(--surface2);display:grid;place-items:center;font-size:16px}.client-info{flex:1}.client-info strong{font-size:14px}.client-info small{color:var(--muted);font-size:12px}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#281321;color:#fff;padding:12px 20px;border-radius:12px;box-shadow:0 8px 30px #0004;font-size:13px;z-index:60;opacity:0;transition:.3s cubic-bezier(.2,.8,.2,1);pointer-events:none;max-width:90%;text-align:center}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.footer{text-align:center;color:var(--muted);font-size:11px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
-@media(max-width:860px){.stats{grid-template-columns:repeat(2,1fr)}.layout{grid-template-columns:1fr}.welcome{align-items:flex-start;flex-direction:column}.top-actions .pill{display:none}.appt-actions{opacity:1}}
-@media(max-width:420px){.wrap{padding:16px 12px 50px}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:22px}.panel{padding:14px}.status{display:none}.logo{height:46px;width:46px}}
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(#fff8fb, #1a1219);
+  --surface: light-dark(#ffffff, #261c25);
+  --surface2: light-dark(#f8edf3, #342431);
+  --text: light-dark(#291522, #fff5fb);
+  --muted: light-dark(#7c6877, #c8b7c5);
+  --border: light-dark(#eadce5, #493746);
+  --pink: #e75d9b;
+  --pink2: #bc3d7c;
+  --pink-soft: #e75d9b22;
+  --green: #20876a;
+  --green-soft: #20876a22;
+  --orange: #eaa83b;
+  --orange-soft: #eaa83b22;
+  --red: #e05c6e;
+  --shadow: 0 12px 32px #42122a12;
+  --radius: 16px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; border: none; }
+a { color: inherit; }
+
+.top {
+  background: linear-gradient(115deg, #281321, #542544);
+  color: white;
+  padding: 16px max(16px, calc((100% - 1200px) / 2));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: 0 4px 20px #0003;
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.logo {
+  height: 52px; width: 52px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 0 0 2px #e75d9b66, 0 0 18px #e75d9b44;
+  flex-shrink: 0;
+}
+.logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.brand h1 { font-size: 22px; letter-spacing: -.6px; }
+.brand p { color: #f3ccdf; font-size: 12px; margin-top: 2px; }
+.top-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pill {
+  border: 1px solid #ffffff44;
+  border-radius: 99px;
+  padding: 7px 12px;
+  font-size: 12px;
+  color: #fff;
+}
+.btn {
+  border-radius: 12px;
+  padding: 10px 16px;
+  background: var(--pink);
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  transition: .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn:hover { background: var(--pink2); transform: translateY(-1px); }
+.btn.secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn.ghost {
+  background: transparent;
+  color: white;
+  border: 1px solid #ffffff55;
+}
+.btn.small { padding: 7px 12px; font-size: 12px; }
+.btn.danger { background: var(--red); }
+.btn.icon {
+  width: 36px; height: 36px;
+  padding: 0;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: var(--surface2);
+  color: var(--text);
+  font-size: 16px;
+}
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+.welcome {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.welcome h2 {
+  font-size: clamp(22px, 4vw, 30px);
+  letter-spacing: -1px;
+}
+.welcome p { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: .2s;
+}
+.stat:hover { transform: translateY(-2px); }
+.stat-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+.stat-icon {
+  height: 32px; width: 32px;
+  border-radius: 10px;
+  background: var(--surface2);
+  display: grid; place-items: center;
+  font-size: 15px;
+}
+.stat strong {
+  display: block;
+  font-size: 26px;
+  letter-spacing: -.8px;
+  margin: 10px 0 2px;
+}
+.stat small { color: var(--muted); font-size: 11px; }
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, .85fr);
+  gap: 16px;
+}
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.panel h3 { font-size: 16px; letter-spacing: -.2px; }
+.panel-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.field, select, textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border .2s;
+}
+.field:focus, select:focus, textarea:focus { border-color: var(--pink); }
+input[type="date"], input[type="time"] { min-height: 42px; }
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 160px;
+}
+.search-box input { padding-left: 36px; }
+.search-box::before {
+  content: "⌕";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.appt {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+  align-items: center;
+  transition: .15s;
+}
+.appt:first-child { border-top: 0; }
+.appt:hover { background: var(--surface2); margin: 0 -10px; padding: 12px 10px; border-radius: 12px; }
+.time {
+  width: 52px;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.avatar {
+  height: 42px; width: 42px;
+  border-radius: 13px;
+  background: var(--surface2);
+  display: grid; place-items: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.appt-info { min-width: 0; flex: 1; }
+.appt-info strong { font-size: 14px; display: block; }
+.appt-info span { font-size: 12px; color: var(--muted); display: block; margin-top: 2px; }
+.status {
+  font-size: 11px;
+  border-radius: 99px;
+  padding: 5px 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.status.confirmed { background: var(--green-soft); color: light-dark(#167454, #7ee0bd); }
+.status.pending { background: var(--orange-soft); color: light-dark(#9c6710, #ffd18a); }
+.status.canceled { background: #e05c6e22; color: light-dark(#b33a4a, #ff9aaa); }
+.appt-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: .2s;
+}
+.appt:hover .appt-actions { opacity: 1; }
+.appt-actions button {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  display: grid; place-items: center;
+}
+.appt-actions button:hover { background: var(--pink-soft); border-color: var(--pink); }
+
+.service {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+.service:first-of-type { border-top: 0; }
+.service .emoji {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: var(--surface2);
+  display: grid; place-items: center;
+  font-size: 18px;
+}
+.service-info { flex: 1; min-width: 0; }
+.service-info strong { display: block; font-size: 14px; }
+.service-info small { color: var(--muted); font-size: 12px; }
+.price { font-size: 14px; font-weight: 800; white-space: nowrap; }
+.service-actions { display: flex; gap: 4px; }
+
+.profile-card {
+  background: linear-gradient(145deg, #fce5f0, #f8f0f5);
+  color: #3d2334;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.profile-avatar {
+  height: 58px; width: 58px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px #e75d9b55;
+}
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.profile-card h4 { margin-bottom: 4px; }
+.profile-card p { font-size: 12px; color: #795b6d; margin-bottom: 8px; }
+.profile-card a {
+  color: #a32c6a;
+  font-weight: 700;
+  font-size: 12px;
+  text-decoration: none;
+}
+.profile-card a:hover { text-decoration: underline; }
+
+.quick {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.quick button {
+  padding: 14px 12px;
+  text-align: left;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  transition: .2s;
+}
+.quick button:hover { border-color: var(--pink); background: var(--pink-soft); }
+.quick button span { display: block; font-size: 20px; margin-bottom: 6px; }
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 32px 12px;
+  font-size: 13px;
+}
+.empty span { font-size: 32px; display: block; margin-bottom: 8px; }
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: #10071199;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 50;
+  backdrop-filter: blur(4px);
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  width: min(480px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 25px 80px #0005;
+  animation: slideUp .25s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.modal-head h3 { font-size: 18px; }
+.close {
+  background: var(--surface2);
+  color: var(--text);
+  border-radius: 10px;
+  height: 34px; width: 34px;
+  font-size: 20px;
+  display: grid; place-items: center;
+}
+.formgrid { display: grid; gap: 12px; }
+.formgrid label {
+  display: grid;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.client-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.client-item:last-child { border-bottom: 0; }
+.client-avatar {
+  width: 38px; height: 38px;
+  border-radius: 12px;
+  background: var(--surface2);
+  display: grid; place-items: center;
+  font-size: 16px;
+}
+.client-info { flex: 1; }
+.client-info strong { font-size: 14px; }
+.client-info small { color: var(--muted); font-size: 12px; }
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #281321;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px #0004;
+  font-size: 13px;
+  z-index: 60;
+  opacity: 0;
+  transition: .3s cubic-bezier(.2,.8,.2,1);
+  pointer-events: none;
+  max-width: 90%;
+  text-align: center;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 860px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .layout { grid-template-columns: 1fr; }
+  .welcome { align-items: flex-start; flex-direction: column; }
+  .top-actions .pill { display: none; }
+  .appt-actions { opacity: 1; }
+}
+@media (max-width: 420px) {
+  .wrap { padding: 16px 12px 50px; }
+  .stats { gap: 8px; }
+  .stat { padding: 12px; }
+  .stat strong { font-size: 22px; }
+  .panel { padding: 14px; }
+  .status { display: none; }
+  .logo { height: 46px; width: 46px; }
+}
 </style>
 </head>
 <body>
@@ -61,7 +492,10 @@ input[type=date],input[type=time]{min-height:42px}.search-box{position:relative;
   <header class="top">
     <div class="brand">
       <div class="logo"><img src="logo.png" alt="AgendaPro"></div>
-      <div><h1>AgendaPro</h1><p>Seu espaço de beleza, organizado.</p></div>
+      <div>
+        <h1>AgendaPro</h1>
+        <p>Seu espaço de beleza, organizado.</p>
+      </div>
     </div>
     <div class="top-actions">
       <span class="pill">✦ Painel profissional</span>
@@ -80,46 +514,87 @@ input[type=date],input[type=time]{min-height:42px}.search-box{position:relative;
     </section>
 
     <section class="stats">
-      <div class="stat"><div class="stat-head">Agendamentos de hoje <span class="stat-icon">▦</span></div><strong id="statAppointments">0</strong><small>Atendimentos na agenda</small></div>
-      <div class="stat"><div class="stat-head">Clientes cadastrados <span class="stat-icon">♡</span></div><strong id="statClients">0</strong><small>Clientes no seu espaço</small></div>
-      <div class="stat"><div class="stat-head">Faturamento previsto <span class="stat-icon">＄</span></div><strong id="statRevenue">R$ 0</strong><small>Com base nos agendamentos de hoje</small></div>
-      <div class="stat"><div class="stat-head">A confirmar <span class="stat-icon">◷</span></div><strong id="statPending">0</strong><small>Confirme com suas clientes</small></div>
+      <div class="stat">
+        <div class="stat-head">Agendamentos de hoje <span class="stat-icon">▦</span></div>
+        <strong id="statAppointments">0</strong>
+        <small>Atendimentos na agenda</small>
+      </div>
+      <div class="stat">
+        <div class="stat-head">Clientes cadastrados <span class="stat-icon">♡</span></div>
+        <strong id="statClients">0</strong>
+        <small>Clientes no seu espaço</small>
+      </div>
+      <div class="stat">
+        <div class="stat-head">Faturamento previsto <span class="stat-icon">＄</span></div>
+        <strong id="statRevenue">R$ 0</strong>
+        <small>Com base nos agendamentos de hoje</small>
+      </div>
+      <div class="stat">
+        <div class="stat-head">A confirmar <span class="stat-icon">◷</span></div>
+        <strong id="statPending">0</strong>
+        <small>Confirme com suas clientes</small>
+      </div>
     </section>
 
     <div class="layout">
       <div>
         <section class="panel">
           <div class="panel-head">
-            <div><h3>Agenda do dia</h3><div class="panel-sub">Acompanhe e gerencie os atendimentos</div></div>
+            <div>
+              <h3>Agenda do dia</h3>
+              <div class="panel-sub">Acompanhe e gerencie os atendimentos</div>
+            </div>
             <div class="controls">
               <input class="field" type="date" id="agendaDate" style="width:150px" aria-label="Data da agenda">
-              <div class="search-box"><input class="field" type="search" id="searchAppt" placeholder="Buscar cliente..." oninput="render()"></div>
+              <div class="search-box">
+                <input class="field" type="search" id="searchAppt" placeholder="Buscar cliente..." oninput="render()">
+              </div>
             </div>
           </div>
           <div id="appointmentList"></div>
         </section>
+
         <section class="panel">
-          <div class="panel-head"><div><h3>Seus serviços</h3><div class="panel-sub">Serviços e valores cadastrados</div></div>
+          <div class="panel-head">
+            <div>
+              <h3>Seus serviços</h3>
+              <div class="panel-sub">Serviços e valores cadastrados</div>
+            </div>
             <button class="btn secondary small" onclick="openModal('service')">＋ Serviço</button>
           </div>
           <div id="serviceList"></div>
         </section>
       </div>
+
       <div>
         <section class="panel">
-          <div class="panel-head"><div><h3>Sua página profissional</h3><div class="panel-sub">Pronta para compartilhar</div></div>
+          <div class="panel-head">
+            <div>
+              <h3>Sua página profissional</h3>
+              <div class="panel-sub">Pronta para compartilhar</div>
+            </div>
             <button class="btn secondary small" onclick="openModal('profile')">Editar</button>
           </div>
           <div class="profile-card">
             <div class="profile-avatar"><img src="logo.png" alt="Logo"></div>
-            <div><h4 id="profileName">Studio da Beleza</h4><p id="profileDesc">Unhas, cabelo e autoestima</p>
+            <div>
+              <h4 id="profileName">Studio da Beleza</h4>
+              <p id="profileDesc">Unhas, cabelo e autoestima</p>
               <a href="#" onclick="shareProfile(event)">Compartilhar perfil ↗</a>
             </div>
           </div>
-          <p class="panel-sub" style="line-height:1.6;margin:12px 0 0">Personalize com seu nome, fotos, serviços e formas de contato.</p>
+          <p class="panel-sub" style="line-height:1.6;margin:12px 0 0">
+            Personalize com seu nome, fotos, serviços e formas de contato.
+          </p>
         </section>
+
         <section class="panel">
-          <div class="panel-head"><div><h3>Acesso rápido</h3><div class="panel-sub">O que você precisa agora?</div></div></div>
+          <div class="panel-head">
+            <div>
+              <h3>Acesso rápido</h3>
+              <div class="panel-sub">O que você precisa agora?</div>
+            </div>
+          </div>
           <div class="quick">
             <button onclick="openModal('appointment')"><span>🗓️</span>Novo agendamento</button>
             <button onclick="openModal('clients')"><span>👥</span>Meus clientes</button>
@@ -127,10 +602,19 @@ input[type=date],input[type=time]{min-height:42px}.search-box{position:relative;
             <button onclick="whatsappReminder()"><span>💬</span>Lembrete WhatsApp</button>
           </div>
         </section>
+
         <section class="panel">
-          <div class="panel-head"><div><h3>Resumo financeiro</h3><div class="panel-sub">Valores dos agendamentos do dia</div></div></div>
+          <div class="panel-head">
+            <div>
+              <h3>Resumo financeiro</h3>
+              <div class="panel-sub">Valores dos agendamentos do dia</div>
+            </div>
+          </div>
           <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-            <div><div class="panel-sub">Total previsto hoje</div><strong id="financeTotal" style="font-size:24px;display:block;margin-top:6px">R$ 0,00</strong></div>
+            <div>
+              <div class="panel-sub">Total previsto hoje</div>
+              <strong id="financeTotal" style="font-size:24px;display:block;margin-top:6px">R$ 0,00</strong>
+            </div>
             <span style="font-size:28px">📈</span>
           </div>
           <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
@@ -140,83 +624,454 @@ input[type=date],input[type=time]{min-height:42px}.search-box{position:relative;
         </section>
       </div>
     </div>
-    <div class="footer">AgendaPro • Dados salvos neste navegador • <button onclick="resetDemo()" style="background:none;border:none;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:11px">Restaurar demo</button></div>
+
+    <div class="footer">
+      AgendaPro • Dados salvos neste navegador • 
+      <button onclick="resetDemo()" style="background:none;border:none;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:11px">Restaurar demo</button>
+    </div>
   </main>
 </div>
 
 <div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this)closeModal()">
   <div class="modal">
-    <div class="modal-head"><h3 id="modalTitle">Novo agendamento</h3><button class="close" onclick="closeModal()">×</button></div>
+    <div class="modal-head">
+      <h3 id="modalTitle">Novo agendamento</h3>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
     <div id="modalBody"></div>
   </div>
 </div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-const today=new Date();
-const localDate=d=>{const x=new Date(d.getTime()-d.getTimezoneOffset()*60000);return x.toISOString().slice(0,10)};
-const money=n=>Number(n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const today = new Date();
+const localDate = d => {
+  const x = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+  return x.toISOString().slice(0, 10);
+};
+const money = n => Number(n || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
-const DEFAULT_SERVICES=[{id:'s1',name:'Manicure em gel',duration:60,price:90,icon:'💅'},{id:'s2',name:'Escova',duration:45,price:70,icon:'💇'},{id:'s3',name:'Design de sobrancelhas',duration:30,price:45,icon:'✨'},{id:'s4',name:'Extensão de cílios',duration:90,price:120,icon:'👁️'}];
-const DEFAULT_APPTS=[{id:'a1',name:'Mariana Costa',service:'Manicure em gel',time:'09:00',date:localDate(today),status:'Confirmado',price:90,icon:'💅'},{id:'a2',name:'Juliana Alves',service:'Escova',time:'10:30',date:localDate(today),status:'A confirmar',price:70,icon:'💇'},{id:'a3',name:'Camila Souza',service:'Extensão de cílios',time:'13:00',date:localDate(today),status:'Confirmado',price:120,icon:'👁️'},{id:'a4',name:'Beatriz Lima',service:'Design de sobrancelhas',time:'15:00',date:localDate(today),status:'A confirmar',price:45,icon:'✨'}];
-const DEFAULT_PROFILE={name:'Studio da Beleza',desc:'Unhas, cabelo e autoestima'};
+const DEFAULT_SERVICES = [
+  { id: 's1', name: 'Manicure em gel', duration: 60, price: 90, icon: '💅' },
+  { id: 's2', name: 'Escova', duration: 45, price: 70, icon: '💇' },
+  { id: 's3', name: 'Design de sobrancelhas', duration: 30, price: 45, icon: '✨' },
+  { id: 's4', name: 'Extensão de cílios', duration: 90, price: 120, icon: '👁️' }
+];
+const DEFAULT_APPTS = [
+  { id: 'a1', name: 'Mariana Costa', service: 'Manicure em gel', time: '09:00', date: localDate(today), status: 'Confirmado', price: 90, icon: '💅' },
+  { id: 'a2', name: 'Juliana Alves', service: 'Escova', time: '10:30', date: localDate(today), status: 'A confirmar', price: 70, icon: '💇' },
+  { id: 'a3', name: 'Camila Souza', service: 'Extensão de cílios', time: '13:00', date: localDate(today), status: 'Confirmado', price: 120, icon: '👁️' },
+  { id: 'a4', name: 'Beatriz Lima', service: 'Design de sobrancelhas', time: '15:00', date: localDate(today), status: 'A confirmar', price: 45, icon: '✨' }
+];
+const DEFAULT_PROFILE = { name: 'Studio da Beleza', desc: 'Unhas, cabelo e autoestima' };
 
-let services=[],appointments=[],profile={},editId=null,mode='appointment';
+let services = [], appointments = [], profile = {}, editId = null, mode = 'appointment';
 
-function load(){try{services=JSON.parse(localStorage.getItem('ap_services'))||[...DEFAULT_SERVICES];appointments=JSON.parse(localStorage.getItem('ap_appointments'))||[...DEFAULT_APPTS];profile=JSON.parse(localStorage.getItem('ap_profile'))||{...DEFAULT_PROFILE}}catch{services=[...DEFAULT_SERVICES];appointments=[...DEFAULT_APPTS];profile={...DEFAULT_PROFILE}}}
-function save(){localStorage.setItem('ap_services',JSON.stringify(services));localStorage.setItem('ap_appointments',JSON.stringify(appointments));localStorage.setItem('ap_profile',JSON.stringify(profile))}
-
-function render(){
-  const date=document.getElementById('agendaDate').value;
-  const q=(document.getElementById('searchAppt')?.value||'').toLowerCase().trim();
-  let list=appointments.filter(a=>a.date===date).filter(a=>!q||a.name.toLowerCase().includes(q)||a.service.toLowerCase().includes(q)).sort((a,b)=>a.time.localeCompare(b.time));
-  const listEl=document.getElementById('appointmentList');
-  if(!list.length){listEl.innerHTML=`<div class="empty"><span>🗓️</span>Nenhum agendamento para esta data.<br>Toque em “Novo agendamento” para começar.</div>`}
-  else{listEl.innerHTML=list.map(a=>`<div class="appt"><div class="time">\( {esc(a.time)}</div><div class="avatar"> \){a.icon||'💆'}</div><div class="appt-info"><strong>\( {esc(a.name)}</strong><span> \){esc(a.service)} • ${money(a.price)}</span></div><span class="status \( {a.status==='A confirmar'?'pending':a.status==='Cancelado'?'canceled':'confirmed'}"> \){esc(a.status)}</span><div class="appt-actions"><button title="Editar" onclick="editAppointment('\( {a.id}')">✎</button><button title="WhatsApp" onclick="waSingle(' \){a.id}')">💬</button><button title="Excluir" onclick="deleteAppointment('${a.id}')">🗑</button></div></div>`).join('')}
-  document.getElementById('serviceList').innerHTML=services.length?services.map(s=>`<div class="service"><div class="emoji">\( {s.icon}</div><div class="service-info"><strong> \){esc(s.name)}</strong><small>\( {s.duration} min</small></div><div class="price"> \){money(s.price)}</div><div class="service-actions"><button class="btn icon" title="Editar" onclick="editService('\( {s.id}')">✎</button><button class="btn icon" title="Excluir" onclick="deleteService(' \){s.id}')">🗑</button></div></div>`).join(''):`<div class="empty"><span>✨</span>Nenhum serviço cadastrado.</div>`;
-  const total=list.reduce((n,a)=>n+Number(a.price||0),0);const pending=list.filter(a=>a.status==='A confirmar').length;const clients=new Set(appointments.map(a=>a.name));
-  document.getElementById('statAppointments').textContent=list.length;document.getElementById('statClients').textContent=clients.size;document.getElementById('statRevenue').textContent=money(total).replace(',00','');document.getElementById('statPending').textContent=pending;document.getElementById('financeTotal').textContent=money(total);
-  document.getElementById('profileName').textContent=profile.name;document.getElementById('profileDesc').textContent=profile.desc;
-  const h=new Date().getHours();document.getElementById('greeting').textContent=`${h<12?'Bom dia':h<18?'Boa tarde':'Boa noite'}, profissional! ✨`;
+function load() {
+  try {
+    services = JSON.parse(localStorage.getItem('ap_services')) || [...DEFAULT_SERVICES];
+    appointments = JSON.parse(localStorage.getItem('ap_appointments')) || [...DEFAULT_APPTS];
+    profile = JSON.parse(localStorage.getItem('ap_profile')) || { ...DEFAULT_PROFILE };
+  } catch {
+    services = [...DEFAULT_SERVICES];
+    appointments = [...DEFAULT_APPTS];
+    profile = { ...DEFAULT_PROFILE };
+  }
+}
+function save() {
+  localStorage.setItem('ap_services', JSON.stringify(services));
+  localStorage.setItem('ap_appointments', JSON.stringify(appointments));
+  localStorage.setItem('ap_profile', JSON.stringify(profile));
 }
 
-function openModal(which,id=null){
-  mode=which;editId=id;const body=document.getElementById('modalBody');const title=document.getElementById('modalTitle');
-  if(which==='appointment'){const a=id?appointments.find(x=>x.id===id):null;title.textContent=a?'Editar agendamento':'Novo agendamento';
-    body.innerHTML=`<form id="modalForm" onsubmit="saveAppointment(event)"><div class="formgrid"><label>Nome da cliente<input class="field" name="name" required placeholder="Ex.: Ana Silva" value="\( {a?esc(a.name):''}" list="clientList"><datalist id="clientList"> \){[...new Set(appointments.map(x=>x.name))].map(n=>`<option value="\( {esc(n)}">`).join('')}</datalist></label><label>Serviço<select name="service" class="field" required> \){services.map(s=>`<option value="${esc(s.name)}" \( {a&&a.service===s.name?'selected':''}> \){esc(s.name)} — \( {money(s.price)}</option>`).join('')}</select></label><label>Data<input class="field" type="date" name="date" required value=" \){a?a.date:document.getElementById('agendaDate').value}"></label><label>Horário<input class="field" type="time" name="time" required value="${a?a.time:'09:00'}"></label><label>Status<select class="field" name="status"><option ${!a||a.status==='Confirmado'?'selected':''}>Confirmado</option><option ${a&&a.status==='A confirmar'?'selected':''}>A confirmar</option><option \( {a&&a.status==='Cancelado'?'selected':''}>Cancelado</option></select></label></div><div class="form-actions"><button type="button" class="btn secondary" onclick="closeModal()">Cancelar</button> \){a?`<button type="button" class="btn danger" onclick="deleteAppointment('${a.id}');closeModal()">Excluir</button>`:''}<button type="submit" class="btn">Salvar</button></div></form>`}
-  else if(which==='service'){const s=id?services.find(x=>x.id===id):null;title.textContent=s?'Editar serviço':'Adicionar serviço';
-    body.innerHTML=`<form id="modalForm" onsubmit="saveService(event)"><div class="formgrid"><label>Nome do serviço<input class="field" name="name" required placeholder="Ex.: Nail art" value="\( {s?esc(s.name):''}"></label><label>Preço (R \))<input class="field" type="number" min="0" step="0.01" name="price" required placeholder="50,00" value="\( {s?s.price:''}"></label><label>Duração<select class="field" name="duration"> \){[30,45,60,90,120].map(d=>`<option value="${d}" \( {s&&s.duration==d?'selected':d===60&&!s?'selected':''}> \){d} minutos</option>`).join('')}</select></label><label>Ícone<select class="field" name="icon">${['💅','💇','✨','👁️','💆','🌸','🦋','💎','🪞','🎀'].map(i=>`<option \( {s&&s.icon===i?'selected':''}> \){i}</option>`).join('')}</select></label></div><div class="form-actions"><button type="button" class="btn secondary" onclick="closeModal()">Cancelar</button>\( {s?`<button type="button" class="btn danger" onclick="deleteService(' \){s.id}');closeModal()">Excluir</button>`:''}<button type="submit" class="btn">Salvar</button></div></form>`}
-  else if(which==='clients'){title.textContent='Meus clientes';const clientsMap={};appointments.forEach(a=>{if(!clientsMap[a.name])clientsMap[a.name]={count:0,last:a.date,total:0};clientsMap[a.name].count++;clientsMap[a.name].total+=Number(a.price||0);if(a.date>clientsMap[a.name].last)clientsMap[a.name].last=a.date});const sorted=Object.entries(clientsMap).sort((a,b)=>b[1].count-a[1].count);
-    body.innerHTML=`<div class="search-box" style="margin-bottom:14px"><input class="field" type="search" id="clientSearch" placeholder="Buscar cliente..." oninput="filterClients()"></div><div id="clientListBox">\( {sorted.length?sorted.map(([name,info])=>`<div class="client-item" data-name=" \){esc(name).toLowerCase()}"><div class="client-avatar">♡</div><div class="client-info"><strong>\( {esc(name)}</strong><small> \){info.count} agendamento${info.count>1?'s':''} • Total \( {money(info.total)}</small></div><button class="btn secondary small" onclick="quickSchedule(' \){esc(name)}')">Agendar</button></div>`).join(''):`<div class="empty"><span>👥</span>Nenhuma cliente cadastrada ainda.</div>`}</div><div class="form-actions"><button type="button" class="btn secondary" onclick="closeModal()">Fechar</button></div>`}
-  else if(which==='profile'){title.textContent='Editar perfil profissional';
-    body.innerHTML=`<form id="modalForm" onsubmit="saveProfile(event)"><div class="formgrid"><label>Nome do espaço<input class="field" name="name" required value="\( {esc(profile.name)}"></label><label>Descrição curta<input class="field" name="desc" required value=" \){esc(profile.desc)}"></label></div><div class="form-actions"><button type="button" class="btn secondary" onclick="closeModal()">Cancelar</button><button type="submit" class="btn">Salvar perfil</button></div></form>`}
+function render() {
+  const date = document.getElementById('agendaDate').value;
+  const q = (document.getElementById('searchAppt')?.value || '').toLowerCase().trim();
+
+  let list = appointments
+    .filter(a => a.date === date)
+    .filter(a => !q || a.name.toLowerCase().includes(q) || a.service.toLowerCase().includes(q))
+    .sort((a, b) => a.time.localeCompare(b.time));
+
+  const listEl = document.getElementById('appointmentList');
+  if (!list.length) {
+    listEl.innerHTML = `<div class="empty"><span>🗓️</span>Nenhum agendamento para esta data.<br>Toque em “Novo agendamento” para começar.</div>`;
+  } else {
+    listEl.innerHTML = list.map(a => `
+      <div class="appt">
+        <div class="time">${esc(a.time)}</div>
+        <div class="avatar">${a.icon || '💆'}</div>
+        <div class="appt-info">
+          <strong>${esc(a.name)}</strong>
+          <span>${esc(a.service)} • ${money(a.price)}</span>
+        </div>
+        <span class="status ${a.status === 'A confirmar' ? 'pending' : a.status === 'Cancelado' ? 'canceled' : 'confirmed'}">${esc(a.status)}</span>
+        <div class="appt-actions">
+          <button title="Editar" onclick="editAppointment('${a.id}')">✎</button>
+          <button title="WhatsApp" onclick="waSingle('${a.id}')">💬</button>
+          <button title="Excluir" onclick="deleteAppointment('${a.id}')">🗑</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('serviceList').innerHTML = services.length
+    ? services.map(s => `
+      <div class="service">
+        <div class="emoji">${s.icon}</div>
+        <div class="service-info">
+          <strong>${esc(s.name)}</strong>
+          <small>${s.duration} min</small>
+        </div>
+        <div class="price">${money(s.price)}</div>
+        <div class="service-actions">
+          <button class="btn icon" title="Editar" onclick="editService('${s.id}')">✎</button>
+          <button class="btn icon" title="Excluir" onclick="deleteService('${s.id}')">🗑</button>
+        </div>
+      </div>
+    `).join('')
+    : `<div class="empty"><span>✨</span>Nenhum serviço cadastrado.</div>`;
+
+  const total = list.reduce((n, a) => n + Number(a.price || 0), 0);
+  const pending = list.filter(a => a.status === 'A confirmar').length;
+  const clients = new Set(appointments.map(a => a.name));
+
+  document.getElementById('statAppointments').textContent = list.length;
+  document.getElementById('statClients').textContent = clients.size;
+  document.getElementById('statRevenue').textContent = money(total).replace(',00', '');
+  document.getElementById('statPending').textContent = pending;
+  document.getElementById('financeTotal').textContent = money(total);
+
+  document.getElementById('profileName').textContent = profile.name;
+  document.getElementById('profileDesc').textContent = profile.desc;
+
+  const h = new Date().getHours();
+  const greet = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
+  document.getElementById('greeting').textContent = `${greet}, profissional! ✨`;
+}
+
+function openModal(which, id = null) {
+  mode = which;
+  editId = id;
+  const body = document.getElementById('modalBody');
+  const title = document.getElementById('modalTitle');
+
+  if (which === 'appointment') {
+    const a = id ? appointments.find(x => x.id === id) : null;
+    title.textContent = a ? 'Editar agendamento' : 'Novo agendamento';
+    body.innerHTML = `
+      <form id="modalForm" onsubmit="saveAppointment(event)">
+        <div class="formgrid">
+          <label>Nome da cliente
+            <input class="field" name="name" required placeholder="Ex.: Ana Silva" value="${a ? esc(a.name) : ''}" list="clientList">
+            <datalist id="clientList">${[...new Set(appointments.map(x => x.name))].map(n => `<option value="${esc(n)}">`).join('')}</datalist>
+          </label>
+          <label>Serviço
+            <select name="service" class="field" required>
+              ${services.map(s => `<option value="${esc(s.name)}" ${a && a.service === s.name ? 'selected' : ''}>${esc(s.name)} — ${money(s.price)}</option>`).join('')}
+            </select>
+          </label>
+          <label>Data
+            <input class="field" type="date" name="date" required value="${a ? a.date : document.getElementById('agendaDate').value}">
+          </label>
+          <label>Horário
+            <input class="field" type="time" name="time" required value="${a ? a.time : '09:00'}">
+          </label>
+          <label>Status
+            <select class="field" name="status">
+              <option ${!a || a.status === 'Confirmado' ? 'selected' : ''}>Confirmado</option>
+              <option ${a && a.status === 'A confirmar' ? 'selected' : ''}>A confirmar</option>
+              <option ${a && a.status === 'Cancelado' ? 'selected' : ''}>Cancelado</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn secondary" onclick="closeModal()">Cancelar</button>
+          ${a ? `<button type="button" class="btn danger" onclick="deleteAppointment('${a.id}');closeModal()">Excluir</button>` : ''}
+          <button type="submit" class="btn">Salvar</button>
+        </div>
+      </form>
+    `;
+  } else if (which === 'service') {
+    const s = id ? services.find(x => x.id === id) : null;
+    title.textContent = s ? 'Editar serviço' : 'Adicionar serviço';
+    body.innerHTML = `
+      <form id="modalForm" onsubmit="saveService(event)">
+        <div class="formgrid">
+          <label>Nome do serviço
+            <input class="field" name="name" required placeholder="Ex.: Nail art" value="${s ? esc(s.name) : ''}">
+          </label>
+          <label>Preço (R$)
+            <input class="field" type="number" min="0" step="0.01" name="price" required placeholder="50,00" value="${s ? s.price : ''}">
+          </label>
+          <label>Duração
+            <select class="field" name="duration">
+              ${[30,45,60,90,120].map(d => `<option value="${d}" ${s && s.duration == d ? 'selected' : d===60 && !s ? 'selected' : ''}>${d} minutos</option>`).join('')}
+            </select>
+          </label>
+          <label>Ícone
+            <select class="field" name="icon">
+              ${['💅','💇','✨','👁️','💆','🌸','🦋','💎','🪞','🎀'].map(i => `<option ${s && s.icon === i ? 'selected' : ''}>${i}</option>`).join('')}
+            </select>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn secondary" onclick="closeModal()">Cancelar</button>
+          ${s ? `<button type="button" class="btn danger" onclick="deleteService('${s.id}');closeModal()">Excluir</button>` : ''}
+          <button type="submit" class="btn">Salvar</button>
+        </div>
+      </form>
+    `;
+  } else if (which === 'clients') {
+    title.textContent = 'Meus clientes';
+    const clientsMap = {};
+    appointments.forEach(a => {
+      if (!clientsMap[a.name]) clientsMap[a.name] = { count: 0, last: a.date, total: 0 };
+      clientsMap[a.name].count++;
+      clientsMap[a.name].total += Number(a.price || 0);
+      if (a.date > clientsMap[a.name].last) clientsMap[a.name].last = a.date;
+    });
+    const sorted = Object.entries(clientsMap).sort((a, b) => b[1].count - a[1].count);
+    body.innerHTML = `
+      <div class="search-box" style="margin-bottom:14px">
+        <input class="field" type="search" id="clientSearch" placeholder="Buscar cliente..." oninput="filterClients()">
+      </div>
+      <div id="clientListBox">
+        ${sorted.length ? sorted.map(([name, info]) => `
+          <div class="client-item" data-name="${esc(name).toLowerCase()}">
+            <div class="client-avatar">♡</div>
+            <div class="client-info">
+              <strong>${esc(name)}</strong>
+              <small>${info.count} agendamento${info.count > 1 ? 's' : ''} • Total ${money(info.total)}</small>
+            </div>
+            <button class="btn secondary small" onclick="quickSchedule('${esc(name)}')">Agendar</button>
+          </div>
+        `).join('') : `<div class="empty"><span>👥</span>Nenhuma cliente cadastrada ainda.</div>`}
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn secondary" onclick="closeModal()">Fechar</button>
+      </div>
+    `;
+  } else if (which === 'profile') {
+    title.textContent = 'Editar perfil profissional';
+    body.innerHTML = `
+      <form id="modalForm" onsubmit="saveProfile(event)">
+        <div class="formgrid">
+          <label>Nome do espaço
+            <input class="field" name="name" required value="${esc(profile.name)}">
+          </label>
+          <label>Descrição curta
+            <input class="field" name="desc" required value="${esc(profile.desc)}">
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn secondary" onclick="closeModal()">Cancelar</button>
+          <button type="submit" class="btn">Salvar perfil</button>
+        </div>
+      </form>
+    `;
+  }
+
   document.getElementById('modalBackdrop').classList.add('open');
 }
-function closeModal(){document.getElementById('modalBackdrop').classList.remove('open');editId=null}
 
-function saveAppointment(e){e.preventDefault();const d=Object.fromEntries(new FormData(e.target));const s=services.find(x=>x.name===d.service)||services[0];if(editId){const idx=appointments.findIndex(a=>a.id===editId);if(idx>-1)appointments[idx]={...appointments[idx],...d,price:s.price,icon:s.icon};toast('Agendamento atualizado!')}else{appointments.push({id:uid(),...d,price:s.price,icon:s.icon});toast('Agendamento adicionado!')}document.getElementById('agendaDate').value=d.date;save();closeModal();render()}
-function editAppointment(id){openModal('appointment',id)}
-function deleteAppointment(id){if(!confirm('Excluir este agendamento?'))return;appointments=appointments.filter(a=>a.id!==id);save();render();toast('Agendamento excluído')}
-function saveService(e){e.preventDefault();const d=Object.fromEntries(new FormData(e.target));d.price=Number(d.price);d.duration=Number(d.duration);if(editId){const idx=services.findIndex(s=>s.id===editId);if(idx>-1){services[idx]={...services[idx],...d};appointments.forEach(a=>{if(a.service===services[idx].name){a.price=d.price;a.icon=d.icon}})}toast('Serviço atualizado!')}else{services.push({id:uid(),...d});toast('Serviço adicionado!')}save();closeModal();render()}
-function editService(id){openModal('service',id)}
-function deleteService(id){if(!confirm('Excluir este serviço?'))return;services=services.filter(s=>s.id!==id);save();render();toast('Serviço excluído')}
-function saveProfile(e){e.preventDefault();const d=Object.fromEntries(new FormData(e.target));profile={...profile,...d};save();closeModal();render();toast('Perfil atualizado!')}
+function closeModal() {
+  document.getElementById('modalBackdrop').classList.remove('open');
+  editId = null;
+}
 
-function filterClients(){const q=(document.getElementById('clientSearch')?.value||'').toLowerCase();document.querySelectorAll('.client-item').forEach(el=>{el.style.display=el.dataset.name.includes(q)?'':'none'})}
-function quickSchedule(name){closeModal();openModal('appointment');setTimeout(()=>{const input=document.querySelector('#modalForm [name="name"]');if(input)input.value=name},50)}
-function whatsappReminder(){const date=document.getElementById('agendaDate').value;const pending=appointments.filter(a=>a.date===date&&a.status==='A confirmar');if(!pending.length){toast('Não há lembretes pendentes para esta data.');return}const msg=`Olá! Passando para confirmar seu horário no ${profile.name}:\n\n`+pending.map(a=>`• ${a.name} às \( {a.time} ( \){a.service})`).join('\n')+`\n\nPodemos confirmar?`;window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank','noopener');toast('Abrindo WhatsApp com mensagem pronta')}
-function waSingle(id){const a=appointments.find(x=>x.id===id);if(!a)return;const msg=`Olá ${a.name}! Passando para confirmar seu horário no ${profile.name}:\n\n📅 ${a.date.split('-').reverse().join('/')} às ${a.time}\n✨ ${a.service}\n\nPodemos confirmar?`;window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank','noopener')}
-function shareProfile(e){e.preventDefault();const msg=`Conheça o ${profile.name} — ${profile.desc}. Entre em contato para agendar seu horário!`;if(navigator.share)navigator.share({title:profile.name,text:msg}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(msg).then(()=>toast('Texto do perfil copiado!'));else toast(msg)}
-function confirmAllPending(){const date=document.getElementById('agendaDate').value;let count=0;appointments.forEach(a=>{if(a.date===date&&a.status==='A confirmar'){a.status='Confirmado';count++}});if(count){save();render();toast(`${count} agendamento(s) confirmado(s)!`)}else toast('Nenhum pendente para confirmar.')}
-function clearDay(){const date=document.getElementById('agendaDate').value;if(!confirm(`Excluir todos os agendamentos de ${date.split('-').reverse().join('/')}?`))return;appointments=appointments.filter(a=>a.date!==date);save();render();toast('Dia limpo')}
-function exportData(){const data={services,appointments,profile,exportedAt:new Date().toISOString()};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`agendapro-${localDate(today)}.json`;a.click();URL.revokeObjectURL(url);toast('Dados exportados!')}
-function resetDemo(){if(!confirm('Restaurar dados de demonstração? Isso apagará suas alterações.'))return;localStorage.removeItem('ap_services');localStorage.removeItem('ap_appointments');localStorage.removeItem('ap_profile');load();document.getElementById('agendaDate').value=localDate(today);render();toast('Demo restaurada')}
-function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),2800)}
+function saveAppointment(e) {
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(e.target));
+  const s = services.find(x => x.name === d.service) || services[0];
+  if (editId) {
+    const idx = appointments.findIndex(a => a.id === editId);
+    if (idx > -1) appointments[idx] = { ...appointments[idx], ...d, price: s.price, icon: s.icon };
+    toast('Agendamento atualizado!');
+  } else {
+    appointments.push({ id: uid(), ...d, price: s.price, icon: s.icon });
+    toast('Agendamento adicionado!');
+  }
+  document.getElementById('agendaDate').value = d.date;
+  save();
+  closeModal();
+  render();
+}
 
-load();document.getElementById('agendaDate').value=localDate(today);document.getElementById('agendaDate').addEventListener('change',render);render();
-if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{})}
+function editAppointment(id) { openModal('appointment', id); }
+
+function deleteAppointment(id) {
+  if (!confirm('Excluir este agendamento?')) return;
+  appointments = appointments.filter(a => a.id !== id);
+  save();
+  render();
+  toast('Agendamento excluído');
+}
+
+function saveService(e) {
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(e.target));
+  d.price = Number(d.price);
+  d.duration = Number(d.duration);
+  if (editId) {
+    const idx = services.findIndex(s => s.id === editId);
+    if (idx > -1) {
+      services[idx] = { ...services[idx], ...d };
+      appointments.forEach(a => {
+        if (a.service === services[idx].name) {
+          a.price = d.price;
+          a.icon = d.icon;
+        }
+      });
+    }
+    toast('Serviço atualizado!');
+  } else {
+    services.push({ id: uid(), ...d });
+    toast('Serviço adicionado!');
+  }
+  save();
+  closeModal();
+  render();
+}
+
+function editService(id) { openModal('service', id); }
+
+function deleteService(id) {
+  if (!confirm('Excluir este serviço?')) return;
+  services = services.filter(s => s.id !== id);
+  save();
+  render();
+  toast('Serviço excluído');
+}
+
+function saveProfile(e) {
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(e.target));
+  profile = { ...profile, ...d };
+  save();
+  closeModal();
+  render();
+  toast('Perfil atualizado!');
+}
+
+function filterClients() {
+  const q = (document.getElementById('clientSearch')?.value || '').toLowerCase();
+  document.querySelectorAll('.client-item').forEach(el => {
+    el.style.display = el.dataset.name.includes(q) ? '' : 'none';
+  });
+}
+
+function quickSchedule(name) {
+  closeModal();
+  openModal('appointment');
+  setTimeout(() => {
+    const input = document.querySelector('#modalForm [name="name"]');
+    if (input) input.value = name;
+  }, 50);
+}
+
+function whatsappReminder() {
+  const date = document.getElementById('agendaDate').value;
+  const pending = appointments.filter(a => a.date === date && a.status === 'A confirmar');
+  if (!pending.length) {
+    toast('Não há lembretes pendentes para esta data.');
+    return;
+  }
+  const msg = `Olá! Passando para confirmar seu horário no ${profile.name}:\n\n` +
+    pending.map(a => `• ${a.name} às ${a.time} (${a.service})`).join('\n') +
+    `\n\nPodemos confirmar?`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  toast('Abrindo WhatsApp com mensagem pronta');
+}
+
+function waSingle(id) {
+  const a = appointments.find(x => x.id === id);
+  if (!a) return;
+  const msg = `Olá ${a.name}! Passando para confirmar seu horário no ${profile.name}:\n\n📅 ${a.date.split('-').reverse().join('/')} às ${a.time}\n✨ ${a.service}\n\nPodemos confirmar?`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+}
+
+function shareProfile(e) {
+  e.preventDefault();
+  const msg = `Conheça o ${profile.name} — ${profile.desc}. Entre em contato para agendar seu horário!`;
+  if (navigator.share) {
+    navigator.share({ title: profile.name, text: msg }).catch(() => {});
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(msg).then(() => toast('Texto do perfil copiado!'));
+  } else {
+    toast(msg);
+  }
+}
+
+function confirmAllPending() {
+  const date = document.getElementById('agendaDate').value;
+  let count = 0;
+  appointments.forEach(a => {
+    if (a.date === date && a.status === 'A confirmar') {
+      a.status = 'Confirmado';
+      count++;
+    }
+  });
+  if (count) {
+    save();
+    render();
+    toast(`${count} agendamento(s) confirmado(s)!`);
+  } else {
+    toast('Nenhum pendente para confirmar.');
+  }
+}
+
+function clearDay() {
+  const date = document.getElementById('agendaDate').value;
+  if (!confirm(`Excluir todos os agendamentos de ${date.split('-').reverse().join('/')}?`)) return;
+  appointments = appointments.filter(a => a.date !== date);
+  save();
+  render();
+  toast('Dia limpo');
+}
+
+function exportData() {
+  const data = { services, appointments, profile, exportedAt: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `agendapro-${localDate(today)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Dados exportados!');
+}
+
+function resetDemo() {
+  if (!confirm('Restaurar dados de demonstração? Isso apagará suas alterações.')) return;
+  localStorage.removeItem('ap_services');
+  localStorage.removeItem('ap_appointments');
+  localStorage.removeItem('ap_profile');
+  load();
+  document.getElementById('agendaDate').value = localDate(today);
+  render();
+  toast('Demo restaurada');
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 2800);
+}
+
+load();
+document.getElementById('agendaDate').value = localDate(today);
+document.getElementById('agendaDate').addEventListener('change', render);
+render();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
 </script>
 </body>
 </html>
