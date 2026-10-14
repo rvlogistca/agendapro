@@ -12,12 +12,11 @@ Aplicativo de gestão para profissionais de beleza (unhas, cabelo, estética).
 - Funciona offline (PWA)
 - Dados salvos no navegador (localStorage)
 - Interface moderna com suporte a tema claro/escuro
-- Logo com efeito neon
 
 ## Como usar
 
 1. Abra o `index.html` no navegador
-2. Ou acesse: https://rvlogistca.github.io/agendapro/
+2. Ou faça o deploy no GitHub Pages
 3. No celular: abra no Chrome → menu → “Adicionar à tela inicial”
 
 ## Arquivos
@@ -30,11 +29,12 @@ Aplicativo de gestão para profissionais de beleza (unhas, cabelo, estética).
 | sw.js          | Service Worker (cache offline)     |
 | README.md      | Este arquivo                       |
 
-## Deploy
+## Deploy no GitHub
 
-1. Faça upload de todos os arquivos no repositório
-2. GitHub Pages já está ativo
-3. Atualize a página com Ctrl + F5 após o upload
+1. Crie um repositório
+2. Faça upload de todos os arquivos desta pasta
+3. Ative GitHub Pages (Settings → Pages → Deploy from main)
+4. Acesse a URL gerada
 
 ## Tecnologias
 
