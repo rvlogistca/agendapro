@@ -2,11 +2,6 @@ name: Build AgendaPro Android APK
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main ]
-
-permissions:
-  contents: read
 
 jobs:
   build:
@@ -15,13 +10,15 @@ jobs:
       - name: 📥 Baixar código
         uses: actions/checkout@v4
 
-      - name: 📁 Listar arquivos
-        run: ls -la
+      - name: 📁 Verificar arquivos
+        run: |
+          ls -la
+          test -f package.json || { echo "ERRO: package.json não encontrado!"; exit 1; }
 
       - name: ☕ Configurar Java
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: 'temurin'
           java-version: '17'
 
       - name: 🟢 Configurar Node.js
@@ -36,16 +33,21 @@ jobs:
         run: |
           mkdir -p dist
           cp index.html dist/
-          [ -f style.css ] && cp style.css dist/ || true
           ls -la dist/
 
-      - name: 📱 Inicializar Capacitor
+      - name: 📱 Configurar Capacitor
         run: |
-          npx init @capacitor/cli@latest . --web-dir=dist --app-id=com.agendapro.app --app-name=AgendaPro
+          # Criar capacitor.config.json manualmente
+          cat > capacitor.config.json << 'EOF'
+          {
+            "appId": "com.agendapro.app",
+            "appName": "AgendaPro",
+            "webDir": "dist"
+          }
+          EOF
+          ls -la
           npx cap add android
-
-      - name: 🔄 Sincronizar projeto Android
-        run: npx cap sync android
+          npx cap sync android
 
       - name: 🔨 Construir APK
         run: |
