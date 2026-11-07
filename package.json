@@ -1,16 +1,18 @@
 {
-  "name": "agendapro",
+  "name": "agendapro-android",
   "version": "1.0.0",
-  "description": "AgendaPro — Gestão de Salão de Beleza",
-  "main": "index.html",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "build": "mkdir -p dist && cp index.html dist/ && echo 'Build concluído!'"
+    "build": "npx cap sync android",
+    "android": "npx cap open android",
+    "sync": "npx cap sync android"
   },
   "dependencies": {
-    "@capacitor/core": "^6.0.0"
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/core": "^7.4.3"
   },
   "devDependencies": {
-    "@capacitor/cli": "^6.0.0",
-    "@capacitor/android": "^6.0.0"
+    "@capacitor/cli": "^7.4.3"
   }
 }
