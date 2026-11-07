@@ -1,0 +1,6 @@
+{
+  "appId": "br.com.agendapro.app",
+  "appName": "AgendaPro",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
